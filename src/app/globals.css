@@ -1,0 +1,47 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+@import "tailwindcss";
+:root {
+  --blood: #8B0000;
+  --blood-bright: #DC2626;
+  --surface: #0F0F1A;
+  --surface-2: #161625;
+  --border: rgba(255,255,255,0.05);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #0A0A14;
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+.pulse-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse-ring 1.5s ease-out infinite;
+}
