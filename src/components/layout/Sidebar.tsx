@@ -17,13 +17,15 @@ import {
 import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/store/auth.store";
 import { authService } from "@/services/auth.service";
+import { Label } from "recharts";
 
 const navItems = [
   { href: "/dashboard", icon: LayoutDashboard, label: "Vue d'ensemble" },
   { href: "/demandes", icon: Droplets, label: "Demandes de sang" },
   { href: "/stocks", icon: HeartPulse, label: "Stocks CNTS" },
-  { href: "/structures", icon: Building2, label: "Structures de santé" },
-  { href: "/jambaars", icon: Users, label: "Jambaars" },
+ { href: "/gererPersonnel", icon: Users, label: "Gérer le personnel" },
+  // { href: "/structures", icon: Building2, label: "Structures de santé" },
+  // { href: "/jambaars", icon: Users, label: "Jambaars" },
   { href: "/rapports", icon: FileBarChart, label: "Rapports" },
 ];
 

@@ -5,53 +5,50 @@ export interface User {
   role: "cnts_admin" | "cnts_tech" | "super_admin";
   avatar?: string;
 }
-
+export type StockLevel = "CRITICAL" | "LOW" | "ADEQUATE" | "SURPLUS";
 export interface AuthState {
   user: User | null;
   token: string | null;
   isAuthenticated: boolean;
 }
 
-export interface BloodStock {
-  id: string;
-  bloodGroup: string;
+export interface DashboardBloodStock {
+  bloodType: string;
   quantity: number;
-  capacity: number;
-  expiresAt: string;
-  location: string;
-  lastUpdated: string;
+  level: StockLevel;
 }
 
-export interface Structure {
-  id: string;
-  name: string;
-  type: "hopital" | "clinique" | "maternite" | "centre_sante";
-  region: string;
-  address: string;
-  phone: string;
-  email: string;
-  status: "active" | "pending" | "suspended";
-  contactPerson: string;
-  createdAt: string;
-  lastRequestAt?: string;
-  totalRequests?: number;
-}
 
-export interface Jambaar {
-  id: string;
-  name: string;
-  phone: string;
-  email?: string;
-  bloodGroup: string;
-  region: string;
-  latitude: number;
-  longitude: number;
-  status: "active" | "suspended" | "cooldown";
-  totalDonations: number;
-  lastDonationAt?: string;
-  points: number;
-  createdAt: string;
-}
+// export interface Structure {
+//   id: string;
+//   name: string;
+//   type: "hopital" | "clinique" | "maternite" | "centre_sante";
+//   region: string;
+//   address: string;
+//   phone: string;
+//   email: string;
+//   status: "active" | "pending" | "suspended";
+//   contactPerson: string;
+//   createdAt: string;
+//   lastRequestAt?: string;
+//   totalRequests?: number;
+// }
+
+// export interface Jambaar {
+//   id: string;
+//   name: string;
+//   phone: string;
+//   email?: string;
+//   bloodGroup: string;
+//   region: string;
+//   latitude: number;
+//   longitude: number;
+//   status: "active" | "suspended" | "cooldown";
+//   totalDonations: number;
+//   lastDonationAt?: string;
+//   points: number;
+//   createdAt: string;
+// }
 
 export interface BloodRequest {
   id: string;
@@ -68,16 +65,13 @@ export interface BloodRequest {
   qrCode?: string;
 }
 
-export interface DashboardStats {
-  totalStocks: number;
-  criticalStocks: number;
+export interface DashboardKPIs {
   pendingRequests: number;
-  activeJambaars: number;
-  todayDonations: number;
-  todayRequests: number;
-  resolvedToday: number;
-  activeStructures: number;
+  criticalStocks: number;
+  activeAlerts: number;
+  totalDonations: number;
 }
+
 
 export interface Alert {
   id: string;
@@ -101,4 +95,24 @@ export interface PaginatedResponse<T> {
   page: number;
   limit: number;
   totalPages: number;
+}
+export interface DashboardRecentRequest {
+  id: string;
+
+  bloodType: string;
+
+  quantityNeeded: number;
+
+  requestingHospital: {
+    id: string;
+    name: string;
+  };
+}
+
+export interface DashboardData {
+  kpis: DashboardKPIs;
+
+  bloodStocks: DashboardBloodStock[];
+
+  recentRequests: DashboardRecentRequest[];
 }

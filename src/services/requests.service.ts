@@ -10,33 +10,37 @@ export interface RequestFilters {
 }
 
 export const requestsService = {
+  // 📥 LISTE
   async getAll(filters: RequestFilters = {}): Promise<PaginatedResponse<BloodRequest>> {
-    const { data } = await apiClient.get("/cnts/requests", { params: filters });
+    const { data } = await apiClient.get("/blood-requests", {
+      params: filters,
+    });
+    
+    // console.log(data);
     return data;
   },
 
+  // 📄 DÉTAIL
   async getById(id: string): Promise<BloodRequest> {
-    const { data } = await apiClient.get(`/cnts/requests/${id}`);
+    const { data } = await apiClient.get(`/blood-requests/${id}`);
     return data;
   },
 
-  async reserve(id: string): Promise<BloodRequest> {
-    const { data } = await apiClient.patch(`/cnts/requests/${id}/reserve`);
+  // 🩸 CRÉER UNE DEMANDE
+  async create(payload: Partial<BloodRequest>): Promise<BloodRequest> {
+    const { data } = await apiClient.post("/blood-requests", payload);
     return data;
   },
 
-  async generateQrCode(id: string): Promise<{ qrCode: string }> {
-    const { data } = await apiClient.post(`/cnts/requests/${id}/qrcode`);
+  // ⚙️ TRAITER (CNTS)
+  async handle(id: string): Promise<BloodRequest> {
+    const { data } = await apiClient.post(`/blood-requests/${id}/handle`);
     return data;
   },
 
-  async markDelivered(id: string): Promise<BloodRequest> {
-    const { data } = await apiClient.patch(`/cnts/requests/${id}/deliver`);
-    return data;
-  },
-
-  async cancel(id: string, reason: string): Promise<BloodRequest> {
-    const { data } = await apiClient.patch(`/cnts/requests/${id}/cancel`, { reason });
+  // ❌ ANNULER
+  async cancel(id: string): Promise<BloodRequest> {
+    const { data } = await apiClient.patch(`/blood-requests/${id}/cancel`);
     return data;
   },
 };
